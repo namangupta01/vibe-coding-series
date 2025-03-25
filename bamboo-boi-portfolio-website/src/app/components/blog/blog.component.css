@@ -1,0 +1,62 @@
+/* Blog component styles */
+
+/* Blog card animations */
+.hover\:transform:hover {
+  transform: scale(1.05);
+}
+
+/* Fix for image aspect ratio */
+.pb-2\/3 {
+  padding-bottom: 66.666667%;
+  position: relative;
+}
+
+/* Paw prints decoration */
+.paw-print {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  background-image: url('https://www.freepnglogos.com/uploads/paw-png/paw-print-clip-art-clker-vector-design-online-25.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.1;
+  z-index: 0;
+}
+
+.top-right {
+  top: 50px;
+  right: 50px;
+  transform: rotate(45deg);
+}
+
+.bottom-left {
+  bottom: 50px;
+  left: 50px;
+  transform: rotate(-45deg);
+}
+
+.top-left {
+  top: 200px;
+  left: 100px;
+  transform: rotate(15deg);
+}
+
+.bottom-right {
+  bottom: 150px;
+  right: 100px;
+  transform: rotate(-15deg);
+}
+
+/* Post transition animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+:host ::ng-deep .prose p {
+  margin-bottom: 1.25em;
+}
+
+:host ::ng-deep .prose {
+  max-width: none;
+} 

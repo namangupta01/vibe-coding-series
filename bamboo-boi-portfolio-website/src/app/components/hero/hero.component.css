@@ -1,0 +1,49 @@
+/* Hero component styles */
+
+/* Panda animations */
+.panda-bounce {
+  animation: bounce 3s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+.panda-glow {
+  animation: glow 4s infinite;
+}
+
+@keyframes glow {
+  0%, 100% {
+    opacity: 0.1;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+  }
+  50% {
+    opacity: 0.3;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.6);
+  }
+}
+
+.panda-content {
+  animation: fadeIn 1s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Make the fun facts pop */
+.list-disc li {
+  transition: all 0.3s ease;
+}
+
+.list-disc li:hover {
+  transform: translateX(10px);
+  color: #38a169;
+} 

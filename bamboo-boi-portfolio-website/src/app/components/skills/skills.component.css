@@ -1,0 +1,21 @@
+/* Skills component styles */ 
+.bg-gray-100 {
+  transition: all 0.3s ease;
+}
+
+.bg-gray-100:hover, .bg-gray-800:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Panda-themed skills */
+:host ::ng-deep div:nth-child(5) .bg-gray-100,
+:host ::ng-deep div:nth-child(5) .bg-gray-800 {
+  background-color: #4caf50;
+  color: white;
+}
+
+:host ::ng-deep div:nth-child(5) .bg-gray-100:hover,
+:host ::ng-deep div:nth-child(5) .bg-gray-800:hover {
+  background-color: #388e3c;
+} 

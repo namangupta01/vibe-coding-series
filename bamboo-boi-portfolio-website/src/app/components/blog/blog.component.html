@@ -1,0 +1,43 @@
+<section id="blog" class="py-20">
+  <div class="container mx-auto px-4 z-10 relative">
+    <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">Panda Developer Diaries 📔</h2>
+    
+    <!-- Blog posts list -->
+    <div *ngIf="!activePost" class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div *ngFor="let post of blogPosts" class="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:transform hover:scale-105">
+        <div class="relative pb-2/3">
+          <img [src]="post.image" [alt]="post.title" class="absolute h-full w-full object-cover">
+        </div>
+        <div class="p-6">
+          <p class="text-gray-500 dark:text-gray-400 text-sm mb-2">{{ post.date }}</p>
+          <h3 class="text-xl font-semibold mb-2">{{ post.title }}</h3>
+          <p class="mb-4">{{ post.excerpt }}</p>
+          <button (click)="showPostDetails(post)" class="text-green-600 dark:text-green-400 font-medium hover:text-green-800 dark:hover:text-green-300 transition-colors">
+            Read More 🎋
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Single post view -->
+    <div *ngIf="activePost" id="post-details" class="max-w-4xl mx-auto bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-2xl">
+      <div class="relative">
+        <img [src]="activePost.image" [alt]="activePost.title" class="w-full h-64 md:h-80 object-cover">
+        <button (click)="goBack()" class="absolute top-4 left-4 bg-white dark:bg-gray-800 p-2 rounded-full shadow-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+          <span class="text-xl">←</span>
+        </button>
+      </div>
+      <div class="p-6 md:p-8">
+        <p class="text-gray-500 dark:text-gray-400 text-sm mb-2">{{ activePost.date }}</p>
+        <h3 class="text-2xl md:text-3xl font-bold mb-4">{{ activePost.title }}</h3>
+        <div class="prose prose-lg dark:prose-invert max-w-none" [innerHTML]="activePost.content"></div>
+      </div>
+    </div>
+    
+    <!-- Panda paw print decorations -->
+    <div class="paw-print top-right"></div>
+    <div class="paw-print bottom-left"></div>
+    <div class="paw-print top-left"></div>
+    <div class="paw-print bottom-right"></div>
+  </div>
+</section> 

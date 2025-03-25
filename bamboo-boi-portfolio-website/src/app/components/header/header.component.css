@@ -1,0 +1,23 @@
+/* Header component styles */
+nav {
+  transition: all 0.3s ease;
+}
+
+.backdrop-blur-sm {
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+a.active {
+  position: relative;
+}
+
+a.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: currentColor;
+} 
