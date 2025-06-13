@@ -1,0 +1,242 @@
+{
+  "test_results": [
+    {
+      "question": "What is the Transformer architecture and how does it work?",
+      "answer": "The Transformer is a neural network architecture introduced in 'Attention Is All You Need' that relies entirely on attention mechanisms, dispensing with recurrence and convolutions entirely.",
+      "contexts": [
+        "Transformer architecture. Apart from the details mentioned below and the variants we explore in Section 3.2, we do not deviate significantly from this architecture as originally proposed. Instead of providing a comprehensive definition of this model, we refer the interested reader to the original paper (Vaswani et al., 2017) or follow-up tutorials3,4for a more detailed introduction. The primary building block of the Transformer is self-attention (Cheng et al., 2016). Self-attention is a variant of attention (Graves, 2013; Bahdanau et al., 2015) that processes a sequence by replacing each element by a weighted average of the rest of the sequence. The original Transformer consisted of an encoder-decoder architecture and was intended for sequence-to-sequence (Sutskever et al., 2014; Kalchbrenner et al., 2014) tasks. It has recently also become common to use models consisting of a single Transformer layer stack, with varying forms of self-attention used to produce architectures",
+        "in Figure 1 will serve as a running example for this section. A distinctive feature of BERT is its uni\ufb01ed architecture across different tasks. There is mini-mal difference between the pre-trained architecture and the \ufb01nal downstream architecture. Model Architecture BERT\u2019s model architecture is a multi-layer bidirectional Transformer encoder based on the original implementation described in Vaswani et al. (2017) and released in thetensor2tensor library.1Because the use of Transformers has become common and our implementation is almost identical to the original, we will omit an exhaustive background description of the model architecture and refer readers to Vaswani et al. (2017) as well as excellent guides such as \u201cThe Annotated Transformer.\u201d2 In this work, we denote the number of layers (i.e., Transformer blocks) as L, the hidden size as H, and the number of self-attention heads as A.3 We primarily report results on two model sizes: BERT BASE (L=12, H=768, A=12, Total Parameters=110M)",
+        "the input sequence. The self-attention operations in the Transformer\u2019s decoder use a \u201ccausal\u201d masking pattern. When producing the ith entry of the output sequence, causal masking prevents the model from attending to the jth entry of the input sequence for j >i. This is used during training so that the model can\u2019t \u201csee into the future\u201d as it produces its output. An attention matrix for this masking pattern is shown in Figure 3, middle. The decoder in an encoder-decoder Transformer is used to autoregressively produce an output sequence. That is, at each output timestep, a token is sampled from the model\u2019s predicted distribution and the sample is fed back into the model to produce a prediction for the next output timestep, and so on. As such, a Transformer decoder (without an encoder) can be used as a language model (LM), i.e. a model trained solely for next-step prediction (Liu et al., 2018; Radford et al., 2018; Al-Rfou et al., 2019). This constitutes the second model structure we"
+      ],
+      "ground_truth": "The Transformer architecture uses self-attention mechanisms and consists of encoder-decoder blocks with multi-head attention, feedforward networks, and positional encoding.",
+      "response_time": 0.04684615135192871,
+      "context_documents_count": 3,
+      "retrieved_sources": [
+        "t5.pdf",
+        "bert.pdf",
+        "t5.pdf"
+      ],
+      "memory_stats": {
+        "total_interactions": 1,
+        "memory_size": 4,
+        "memory_usage": "1/4"
+      }
+    },
+    {
+      "question": "Explain the concept of self-attention mechanism in neural networks.",
+      "answer": "The Transformer is a neural network architecture introduced in 'Attention Is All You Need' that relies entirely on attention mechanisms, dispensing with recurrence and convolutions entirely.",
+      "contexts": [
+        "because we hypothesized it would allow the model to easily learn to attend by relative positions, since for any fixed offset k,PEpos+kcan be represented as a linear function of PEpos. We also experimented with using learned positional embeddings [ 9] instead, and found that the two versions produced nearly identical results (see Table 3 row (E)). We chose the sinusoidal version because it may allow the model to extrapolate to sequence lengths longer than the ones encountered during training. 4 Why Self-Attention In this section we compare various aspects of self-attention layers to the recurrent and convolutional layers commonly used for mapping one variable-length sequence of symbol representations (x1, ..., x n)to another sequence of equal length (z1, ..., z n), with xi, zi\u2208Rd, such as a hidden layer in a typical sequence transduction encoder or decoder. Motivating our use of self-attention we consider three desiderata. One is the total computational complexity per layer. Another is",
+        "layer that attends to the output of the encoder. The self-attention mechanism in the decoder also uses a form of autoregressive or causal selfattention, which only allows the model to attend to past outputs. The output of the final decoder block is fed into a dense layer with a softmax output, whose weights are shared with the input embedding matrix. All attention mechanisms in the Transformer are split up into independent \u201cheads\u201d whose outputs are concatenated before being further processed. Since self-attention is order-independent (i.e. it is an operation on sets), it is common to provide an explicit position signal to the Transformer. While the original Transformer used a sinusoidal position signal or learned position embeddings, it has recently become more common to use relative position embeddings (Shaw et al., 2018; Huang et al., 2018a). Instead of using a fixed embedding for each position, relative position embeddings produce a different learned embedding according to the",
+        "as described in section 3.2. Self-attention, sometimes called intra-attention is an attention mechanism relating different positions of a single sequence in order to compute a representation of the sequence. Self-attention has been used successfully in a variety of tasks including reading comprehension, abstractive summarization, textual entailment and learning task-independent sentence representations [4, 27, 28, 22]. End-to-end memory networks are based on a recurrent attention mechanism instead of sequencealigned recurrence and have been shown to perform well on simple-language question answering and language modeling tasks [34]. To the best of our knowledge, however, the Transformer is the first transduction model relying entirely on self-attention to compute representations of its input and output without using sequencealigned RNNs or convolution. In the following sections, we will describe the Transformer, motivate self-attention and discuss its advantages over models such as"
+      ],
+      "ground_truth": "Self-attention allows each position in a sequence to attend to all positions in the same sequence, enabling the model to capture dependencies regardless of distance.",
+      "response_time": 0.018633127212524414,
+      "context_documents_count": 3,
+      "retrieved_sources": [
+        "attention_is_all_you_need.pdf",
+        "t5.pdf",
+        "attention_is_all_you_need.pdf"
+      ],
+      "memory_stats": {
+        "total_interactions": 2,
+        "memory_size": 4,
+        "memory_usage": "2/4"
+      }
+    },
+    {
+      "question": "What are the key differences between BERT and GPT models?",
+      "answer": "The Transformer is a neural network architecture introduced in 'Attention Is All You Need' that relies entirely on attention mechanisms, dispensing with recurrence and convolutions entirely.",
+      "contexts": [
+        "several other differences between how BERT and GPT were trained: \u2022 GPT is trained on the BooksCorpus (800M words); BERT is trained on the BooksCorpus (800M words) and Wikipedia (2,500M words). \u2022 GPT uses a sentence separator ( [SEP] ) and classi\ufb01er token ( [CLS] ) which are only introduced at \ufb01ne-tuning time; BERT learns [SEP] ,[CLS] and sentence A/Bembeddings during pre-training. \u2022 GPT was trained for 1M steps with a batch size of 32,000 words; BERT was trained for 1M steps with a batch size of 128,000 words. \u2022 GPT used the same learning rate of 5e-5 for all \ufb01ne-tuning experiments; BERT chooses a task-speci\ufb01c \ufb01ne-tuning learning rate which performs the best on the development set.To isolate the effect of these differences, we perform ablation experiments in Section 5.1 which demonstrate that the majority of the improvements are in fact coming from the two pre-training tasks and the bidirectionality they enable. A.5 Illustrations of Fine-tuning on Different Tasks The illustration of",
+        "popular representation learning models including ELMo, OpenAI GPT and BERT. The comparisons between the model architectures are shown visually in Figure 3. Note that in addition to the architecture differences, BERT and OpenAI GPT are \ufb01netuning approaches, while ELMo is a feature-based approach. The most comparable existing pre-training method to BERT is OpenAI GPT, which trains a left-to-right Transformer LM on a large text corpus. In fact, many of the design decisions in BERT were intentionally made to make it as close to GPT as possible so that the two methods could be minimally compared. The core argument of this work is that the bi-directionality and the two pretraining tasks presented in Section 3.1 account for the majority of the empirical improvements, but we do note that there are several other differences between how BERT and GPT were trained: \u2022 GPT is trained on the BooksCorpus (800M words); BERT is trained on the BooksCorpus (800M words) and Wikipedia (2,500M words). \u2022 GPT",
+        "Transformer blocks) as L, the hidden size as H, and the number of self-attention heads as A.3 We primarily report results on two model sizes: BERT BASE (L=12, H=768, A=12, Total Parameters=110M) and BERT LARGE (L=24, H=1024, A=16, Total Parameters=340M). BERT BASE was chosen to have the same model size as OpenAI GPT for comparison purposes. Critically, however, the BERT Transformer uses bidirectional self-attention, while the GPT Transformer uses constrained self-attention where every token can only attend to context to its left.4 1https://github.com/tensor\ufb02ow/tensor2tensor 2http://nlp.seas.harvard.edu/2018/04/03/attention.html 3In all cases we set the feed-forward/\ufb01lter size to be 4H, i.e., 3072 for the H= 768 and 4096 for the H= 1024 . 4We note that in the literature the bidirectional TransInput/Output Representations To make BERT handle a variety of down-stream tasks, our input representation is able to unambiguously represent both a single sentence and a pair of sentences"
+      ],
+      "ground_truth": "BERT uses bidirectional training and is designed for understanding tasks, while GPT uses autoregressive training and is designed for generation tasks.",
+      "response_time": 0.015228748321533203,
+      "context_documents_count": 3,
+      "retrieved_sources": [
+        "bert.pdf",
+        "bert.pdf",
+        "bert.pdf"
+      ],
+      "memory_stats": {
+        "total_interactions": 3,
+        "memory_size": 4,
+        "memory_usage": "3/4"
+      }
+    },
+    {
+      "question": "How does positional encoding work in Transformer models?",
+      "answer": "The Transformer is a neural network architecture introduced in 'Attention Is All You Need' that relies entirely on attention mechanisms, dispensing with recurrence and convolutions entirely.",
+      "contexts": [
+        "layer that attends to the output of the encoder. The self-attention mechanism in the decoder also uses a form of autoregressive or causal selfattention, which only allows the model to attend to past outputs. The output of the final decoder block is fed into a dense layer with a softmax output, whose weights are shared with the input embedding matrix. All attention mechanisms in the Transformer are split up into independent \u201cheads\u201d whose outputs are concatenated before being further processed. Since self-attention is order-independent (i.e. it is an operation on sets), it is common to provide an explicit position signal to the Transformer. While the original Transformer used a sinusoidal position signal or learned position embeddings, it has recently become more common to use relative position embeddings (Shaw et al., 2018; Huang et al., 2018a). Instead of using a fixed embedding for each position, relative position embeddings produce a different learned embedding according to the",
+        "the input sequence. The self-attention operations in the Transformer\u2019s decoder use a \u201ccausal\u201d masking pattern. When producing the ith entry of the output sequence, causal masking prevents the model from attending to the jth entry of the input sequence for j >i. This is used during training so that the model can\u2019t \u201csee into the future\u201d as it produces its output. An attention matrix for this masking pattern is shown in Figure 3, middle. The decoder in an encoder-decoder Transformer is used to autoregressively produce an output sequence. That is, at each output timestep, a token is sampled from the model\u2019s predicted distribution and the sample is fed back into the model to produce a prediction for the next output timestep, and so on. As such, a Transformer decoder (without an encoder) can be used as a language model (LM), i.e. a model trained solely for next-step prediction (Liu et al., 2018; Radford et al., 2018; Al-Rfou et al., 2019). This constitutes the second model structure we",
+        "input and output without using sequencealigned RNNs or convolution. In the following sections, we will describe the Transformer, motivate self-attention and discuss its advantages over models such as [17, 18] and [9]. 3 Model Architecture Most competitive neural sequence transduction models have an encoder-decoder structure [ 5,2,35]. Here, the encoder maps an input sequence of symbol representations (x1, ..., x n)to a sequence of continuous representations z= (z1, ..., z n). Given z, the decoder then generates an output sequence (y1, ..., y m)of symbols one element at a time. At each step the model is auto-regressive [10], consuming the previously generated symbols as additional input when generating the next. 2 Figure 1: The Transformer model architecture. The Transformer follows this overall architecture using stacked self-attention and point-wise, fully connected layers for both the encoder and decoder, shown in the left and right halves of Figure 1, respectively. 3.1 Encoder and"
+      ],
+      "ground_truth": "Positional encoding adds information about token positions in the sequence since Transformers don't have inherent notion of order.",
+      "response_time": 0.016056060791015625,
+      "context_documents_count": 3,
+      "retrieved_sources": [
+        "t5.pdf",
+        "t5.pdf",
+        "attention_is_all_you_need.pdf"
+      ],
+      "memory_stats": {
+        "total_interactions": 4,
+        "memory_size": 4,
+        "memory_usage": "4/4"
+      }
+    },
+    {
+      "question": "What is the significance of the 'Attention is All You Need' paper?",
+      "answer": "The Transformer is a neural network architecture introduced in 'Attention Is All You Need' that relies entirely on attention mechanisms, dispensing with recurrence and convolutions entirely.",
+      "contexts": [
+        "[40] Muhua Zhu, Yue Zhang, Wenliang Chen, Min Zhang, and Jingbo Zhu. Fast and accurate shift-reduce constituent parsing. In Proceedings of the 51st Annual Meeting of the ACL (Volume 1: Long Papers) , pages 434\u2013443. ACL, August 2013. 12 Attention Visualizations Input-Input Layer5 It is in this spirit that a majority of American governments have passed new laws since 2009 making the registration or voting process more difficult . <EOS> <pad> <pad> <pad> <pad> <pad> <pad> It is in this spirit that a majority of American governments have passed new laws since 2009 making the registration or voting process more difficult . <EOS> <pad> <pad> <pad> <pad> <pad> <pad> Figure 3: An example of the attention mechanism following long-distance dependencies in the encoder self-attention in layer 5 of 6. Many of the attention heads attend to a distant dependency of the verb \u2018making\u2019, completing the phrase \u2018making...more difficult\u2019. Attentions here shown only for the word \u2018making\u2019. Different colors",
+        "5: Many of the attention heads exhibit behaviour that seems related to the structure of the sentence. We give two such examples above, from two different heads from the encoder self-attention at layer 5 of 6. The heads clearly learned to perform different tasks. 15",
+        "BitterLesson.html , 2019. Wilson L. Taylor. \u201cCloze procedure\u201d: A new tool for measuring readability. Journalism Bulletin, 1953. Trieu H. Trinh and Quoc V. Le. A simple method for commonsense reasoning. arXiv preprint arXiv:1806.02847 , 2018. Adam Trischler, Tong Wang, Xingdi Yuan, Justin Harris, Alessandro Sordoni, Philip Bachman, and Kaheer Suleman. NewsQA: A machine comprehension dataset. arXiv preprint arXiv:1611.09830 , 2016. Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N. Gomez, \u0141ukasz Kaiser, and Illia Polosukhin. Attention is all you need. In Advances in neural information processing systems , 2017. Elena Voita, Rico Sennrich, and Ivan Titov. The bottom-up evolution of representations in the transformer: A study with machine translation and language modeling objectives. arXiv preprint arXiv:1909.01380 , 2019. Alex Wang, Amapreet Singh, Julian Michael, Felix Hill, Omer Levy, and Samuel R. Bowman. GLUE: A multi-task benchmark and analysis"
+      ],
+      "ground_truth": "This paper introduced the Transformer architecture, showing that attention mechanisms alone can achieve state-of-the-art results without recurrence or convolution.",
+      "response_time": 0.014212846755981445,
+      "context_documents_count": 3,
+      "retrieved_sources": [
+        "attention_is_all_you_need.pdf",
+        "attention_is_all_you_need.pdf",
+        "t5.pdf"
+      ],
+      "memory_stats": {
+        "total_interactions": 4,
+        "memory_size": 4,
+        "memory_usage": "4/4"
+      }
+    },
+    {
+      "question": "Describe the training process of BERT and its masked language modeling objective.",
+      "answer": "The Transformer is a neural network architecture introduced in 'Attention Is All You Need' that relies entirely on attention mechanisms, dispensing with recurrence and convolutions entirely.",
+      "contexts": [
+        "The model is \ufb01rst pretrained on a large unlabeled text corpus and subsequently \ufb01netuned using end-task labeled data. 2.2 Architecture BERT uses the now ubiquitous transformer architecture ( Vaswani et al. ,2017 ), which we will not review in detail. We use a transformer architecture withLlayers. Each block uses Aself-attention heads and hidden dimension H. 2.3 Training Objectives During pretraining, BERT uses two objectives: masked language modeling and next sentence prediction. Masked Language Model (MLM) A random sample of the tokens in the input sequence is selected and replaced with the special token [MASK]. The MLM objective is a cross-entropy loss on predicting the masked tokens. BERT uniformly selects 15% of the input tokens for possible replacement. Of the selected tokens, 80% are replaced with [MASK], 10% are left unchanged,and 10% are replaced by a randomly selected vocabulary token. In the original implementation, random masking and replacement is performed once in the",
+        "techniques that are inspired by commonly-used objectives but differ significantly in their approach. First, we include a basic \u201cprefix language modeling\u201d objective as was used in Section 3.2.3. This technique splits a span of text into two components, one to use as inputs to the encoder and the other to use as a target sequence to be predicted by the decoder. Second, we consider an objective inspired by the \u201cmasked language modeling\u201d (MLM) objective used in BERT (Devlin et al., 2018). MLM takes a span of text and corrupts 15%of the tokens. 90%of the corrupted tokens are replaced with a special mask token and 10%are replaced with a random token. Since BERT is an encoder-only model, its goal during pre-training is to reconstruct masked tokens at the output of the encoder. In the encoder-decoder case, we simply use the entire uncorrupted sequence as the target. Note that this differs from our baseline objective, which uses only the corrupted tokens as targets; we compare these two",
+        "passages and nearly 100,000 questions. The dataset is collected from English examinations in China, which are designed for middle and high school students. In RACE, each passage is associated with multiple questions. For every question, the task is to select one correct answer from four options. RACE has signi\ufb01cantly longer context than other popular reading comprehension datasets and the proportion of questions that requires reasoning is very large. 4 Training Procedure Analysis This section explores and quanti\ufb01es which choices are important for successfully pretraining BERT models. We keep the model architecture \ufb01xed.7 Speci\ufb01cally, we begin by training BERT models with the same con\ufb01guration as BERT BASE (L= 12,H= 768 ,A= 12 , 110M params). 4.1 Static vs. Dynamic Masking As discussed in Section 2, BERT relies on randomly masking and predicting tokens. The original BERT implementation performed masking once during data preprocessing, resulting in a singlestatic mask. To avoid using"
+      ],
+      "ground_truth": "BERT uses masked language modeling where random tokens are masked and the model learns to predict them using bidirectional context.",
+      "response_time": 0.011407136917114258,
+      "context_documents_count": 3,
+      "retrieved_sources": [
+        "roberta.pdf",
+        "t5.pdf",
+        "roberta.pdf"
+      ],
+      "memory_stats": {
+        "total_interactions": 4,
+        "memory_size": 4,
+        "memory_usage": "4/4"
+      }
+    },
+    {
+      "question": "What are the advantages of using pre-trained language models like GPT-3?",
+      "answer": "The Transformer is a neural network architecture introduced in 'Attention Is All You Need' that relies entirely on attention mechanisms, dispensing with recurrence and convolutions entirely.",
+      "contexts": [
+        "likely to be learned de novo, whereas translation clearly must be learned during pretraining, although possibly from data that is very different in organization and style than the test data. Ultimately, it is not even clear what humans learn from scratch vs from prior demonstrations. Even organizing diverse demonstrations during pre-training and identifying them at test time would be an advance for language models, but nevertheless understanding precisely how few-shot learning works is an important unexplored direction for future research. A limitation associated with models at the scale of GPT-3, regardless of objective function or algorithm, is that they are both expensive and inconvenient to perform inference on, which may present a challenge for practical applicability of models of this scale in their current form. One possible future direction to address this is distillation [ HVD15 ] of large models down to a manageable size for speci\ufb01c tasks. Large models such as GPT-3 contain",
+        "prediction is likely to hit limits, and augmentation with a different approach is likely to be necessary. Promising future directions in this vein might include learning the objective function from humans [ ZSW+19a], \ufb01ne-tuning with reinforcement learning, or adding additional modalities such as images to provide grounding and a better model of the world [CLY+19]. Another limitation broadly shared by language models is poor sample ef\ufb01ciency during pre-training. While GPT-3 takes a step towards test-time sample ef\ufb01ciency closer to that of humans (one-shot or zero-shot), it still sees much more text during pre-training than a human sees in the their lifetime [ Lin20 ]. Improving pre-training sample ef\ufb01ciency is an important direction for future work, and might come from grounding in the physical world to provide additional information, or from algorithmic improvements. A limitation, or at least uncertainty, associated with few-shot learning in GPT-3 is ambiguity about whether few-shot",
+        "of examples. By contrast, humans can generally perform a new language task from only a few examples or from simple instructions \u2013 something which current NLP systems still largely struggle to do. Here we show that scaling up language models greatly improves task-agnostic, few-shot performance, sometimes even reaching competitiveness with prior state-of-the-art \ufb01netuning approaches. Speci\ufb01cally, we train GPT-3, an autoregressive language model with 175 billion parameters, 10x more than any previous non-sparse language model, and test its performance in the few-shot setting. For all tasks, GPT-3 is applied without any gradient updates or \ufb01ne-tuning, with tasks and few-shot demonstrations speci\ufb01ed purely via text interaction with the model. GPT-3 achieves strong performance on many NLP datasets, including translation, question-answering, and cloze tasks, as well as several tasks that require on-the-\ufb02y reasoning or domain adaptation, such as unscrambling words, using a novel word in a"
+      ],
+      "ground_truth": "Pre-trained language models like GPT-3 provide strong foundations for various NLP tasks through transfer learning and few-shot learning capabilities.",
+      "response_time": 0.01974320411682129,
+      "context_documents_count": 3,
+      "retrieved_sources": [
+        "gpt3.pdf",
+        "gpt3.pdf",
+        "gpt3.pdf"
+      ],
+      "memory_stats": {
+        "total_interactions": 4,
+        "memory_size": 4,
+        "memory_usage": "4/4"
+      }
+    },
+    {
+      "question": "How does RoBERTa improve upon the original BERT model?",
+      "answer": "The Transformer is a neural network architecture introduced in 'Attention Is All You Need' that relies entirely on attention mechanisms, dispensing with recurrence and convolutions entirely.",
+      "contexts": [
+        "which aspects of the methods contribute the most. Training is computationally expensive, limiting the amount of tuning that can be done, and is often done with private training data of varying sizes, limiting our ability to measure the effects of the modeling advances. \u2217Equal contribution. 1Our models and code are available at: https://github.com/pytorch/fairseqWe present a replication study of BERT pretraining ( Devlin et al. ,2019 ), which includes a careful evaluation of the effects of hyperparmeter tuning and training set size. We \ufb01nd that BERT was signi\ufb01cantly undertrained and propose an improved recipe for training BERT models, which we call RoBERTa, that can match or exceed the performance of all of the post-BERT methods. Our modi\ufb01cations are simple, they include: (1) training the model longer, with bigger batches, over more data; (2) removing the next sentence prediction objective; (3) training on longer sequences; and (4) dynamically changing the masking pattern applied to",
+        "more data than the original BERT ( Devlin et al. ,2019 ). It is also trained with a batch size eight times larger for half as many optimization steps, thus seeing four times as many sequences in pretraining compared to BERT. To help disentangle the importance of these factors from other modeling choices (e.g., the pretraining objective), we begin by training RoBERTa following the BERT LARGE architecture ( L= 24 , H= 1024 ,A= 16 , 355M parameters). We pretrain for 100K steps over a comparable B OOK CORPUS plus W IKIPEDIA dataset as was used in Model data bsz stepsSQuADMNLI-m SST-2(v1.1/2.0) RoBERTa with B OOKS + W IKI 16GB 8K 100K 93.6/87.3 89.0 95.3 + additional data ( \u00a73.2) 160GB 8K 100K 94.0/87.7 89.3 95.6 + pretrain longer 160GB 8K 300K 94.4/88.7 90.0 96.1 + pretrain even longer 160GB 8K 500K 94.6/89.4 90.2 96.4 BERT LARGE with B OOKS + W IKI 13GB 256 1M 90.9/81.8 86.6 93.7 XLNet LARGE with B OOKS + W IKI 13GB 256 1M 94.0/87.8 88.4 94.4 + additional data 126GB 2K 500K 94.5/88.8",
+        "is left to future work. 5 RoBERTa In the previous section we propose modi\ufb01cations to the BERT pretraining procedure that improve end-task performance. We now aggregate these improvements and evaluate their combined impact. We call this con\ufb01guration RoBERTa for Robustly optimized BERT approach. Speci\ufb01cally, RoBERTa is trained with dynamic masking (Section 4.1),FULL -SENTENCES without NSP loss (Section 4.2), large mini-batches (Section 4.3) and a larger byte-level BPE (Section 4.4). Additionally, we investigate two other important factors that have been under-emphasized in previous work: (1) the data used for pretraining, and (2) the number of training passes through the data. For example, the recently proposed XLNet architecture ( Yang et al. ,2019 ) is pretrained using nearly 10 times more data than the original BERT ( Devlin et al. ,2019 ). It is also trained with a batch size eight times larger for half as many optimization steps, thus seeing four times as many sequences in"
+      ],
+      "ground_truth": "RoBERTa improves upon BERT by removing the next sentence prediction task, using dynamic masking, and training on more data.",
+      "response_time": 0.011324882507324219,
+      "context_documents_count": 3,
+      "retrieved_sources": [
+        "roberta.pdf",
+        "roberta.pdf",
+        "roberta.pdf"
+      ],
+      "memory_stats": {
+        "total_interactions": 4,
+        "memory_size": 4,
+        "memory_usage": "4/4"
+      }
+    },
+    {
+      "question": "What is the T5 model and how does it approach text-to-text transfer?",
+      "answer": "The Transformer is a neural network architecture introduced in 'Attention Is All You Need' that relies entirely on attention mechanisms, dispensing with recurrence and convolutions entirely.",
+      "contexts": [
+        "be used as a language model (LM), i.e. a model trained solely for next-step prediction (Liu et al., 2018; Radford et al., 2018; Al-Rfou et al., 2019). This constitutes the second model structure we consider. A schematic of this architecture is shown in Figure 4, middle. In fact, early work on transfer learning for NLP used this architecture with a language modeling objective as a pre-training method (Radford et al., 2018). Language models are typically used for compression or sequence generation (Graves, 2013). However, they can also be used in the text-to-text framework simply by concatenating the inputs and targets. As an example, consider the case of English to German translation: If we have a training datapoint with input sentence \u201cThat is good.\u201d and target \u201cDas ist gut.\u201d, we would simply train the model on next-step prediction over the concatenated input sequence \u201ctranslate English to German: That is good. target: Das ist gut.\u201d If we wanted to 16 Exploring the Limits of Transfer",
+        "learning, attentionbased models, deep learning 1. Introduction Training a machine learning model to perform natural language processing (NLP) tasks often requires that the model can process text in a way that is amenable to downstream learning. This can be loosely viewed as developing general-purpose knowledge that allows the model to \u201cunderstand\u201d text. This knowledge can range from low-level (e.g. the spelling \u2217.Equalcontribution. Adescriptionofeachauthor\u2019scontributionisavailableinAppendixA.Correspondence tocraffel@gmail.com . 1.https://github.com/google-research/text-to-text-transfer-transformer \u00a92020 Colin Raffel, Noam Shazeer, Adam Roberts, Katherine Lee, Sharan Narang, Michael Matena, Yanqi Zhou, Wei Li, and Peter J. Liu. License: CC-BY 4.0, see https://creativecommons.org/licenses/by/4.0/ . Attribution requirements are provided at http://jmlr.org/papers/v21/20-074.html .arXiv:1910.10683v4 [cs.LG] 19 Sep 2023 Raffel, Shazeer, Roberts, Lee, Narang, Matena, Zhou, Li and Liu or",
+        "question answering, document 2.http://commoncrawl.org 2 Exploring the Limits of Transfer Learning \"translate English to German: That is good.\" \"cola sentence: The course is jumping well.\" \"summarize: state authorities dispatched emergency crews tuesday to survey the damage after an onslaught of severe weather in mississippi\u2026\" \"stsb sentence1: The rhino grazed on the grass. sentence2: A rhino is grazing in a field.\" T5\"Das ist gut.\" \"not acceptable\" \"six people hospitalized after a storm in attala county.\" \"3.8\" Figure 1: A diagram of our text-to-text framework. Every task we consider\u2014including translation, question answering, and classification\u2014is cast as feeding our model text as input and training it to generate some target text. This allows us to use the same model, loss function, hyperparameters, etc. across our diverse set of tasks. It also provides a standard testbed for the methods included in our empirical survey. \u201cT5\u201d refers to our model, which we dub the \u201c"
+      ],
+      "ground_truth": "T5 treats every NLP task as a text-to-text problem, using a unified framework where inputs and outputs are always text strings.",
+      "response_time": 0.0157620906829834,
+      "context_documents_count": 3,
+      "retrieved_sources": [
+        "t5.pdf",
+        "t5.pdf",
+        "t5.pdf"
+      ],
+      "memory_stats": {
+        "total_interactions": 4,
+        "memory_size": 4,
+        "memory_usage": "4/4"
+      }
+    },
+    {
+      "question": "Compare and contrast different attention mechanisms used in modern NLP models.",
+      "answer": "The Transformer is a neural network architecture introduced in 'Attention Is All You Need' that relies entirely on attention mechanisms, dispensing with recurrence and convolutions entirely.",
+      "contexts": [
+        "is equal to the combination of a self-attention layer and a point-wise feed-forward layer, the approach we take in our model. As side benefit, self-attention could yield more interpretable models. We inspect attention distributions from our models and present and discuss examples in the appendix. Not only do individual attention heads clearly learn to perform different tasks, many appear to exhibit behavior related to the syntactic and semantic structure of the sentences. 5 Training This section describes the training regime for our models. 5.1 Training Data and Batching We trained on the standard WMT 2014 English-German dataset consisting of about 4.5 million sentence pairs. Sentences were encoded using byte-pair encoding [ 3], which has a shared sourcetarget vocabulary of about 37000 tokens. For English-French, we used the significantly larger WMT 2014 English-French dataset consisting of 36M sentences and split tokens into a 32000 word-piece vocabulary [ 38]. Sentence pairs were",
+        "Language Models are Few-Shot Learners Tom B. Brown\u0003Benjamin Mann\u0003Nick Ryder\u0003Melanie Subbiah\u0003 Jared KaplanyPrafulla Dhariwal Arvind Neelakantan Pranav Shyam Girish Sastry Amanda Askell Sandhini Agarwal Ariel Herbert-Voss Gretchen Krueger Tom Henighan Rewon Child Aditya Ramesh Daniel M. Ziegler Jeffrey Wu Clemens Winter Christopher Hesse Mark Chen Eric Sigler Mateusz Litwin Scott Gray Benjamin Chess Jack Clark Christopher Berner Sam McCandlish Alec Radford Ilya Sutskever Dario Amodei OpenAI Abstract Recent work has demonstrated substantial gains on many NLP tasks and benchmarks by pre-training on a large corpus of text followed by \ufb01ne-tuning on a speci\ufb01c task. While typically task-agnostic in architecture, this method still requires task-speci\ufb01c \ufb01ne-tuning datasets of thousands or tens of thousands of examples. By contrast, humans can generally perform a new language task from only a few examples or from simple instructions \u2013 something which current NLP systems still largely struggle to",
+        "caution that the high inter-run variance of CoLA, CB, and COPA can make it harder to compare models using the GLUE and SuperGLUE scores alone. 3.2 Architectures While the Transformer was originally introduced with an encoder-decoder architecture, much modern work on transfer learning for NLP uses alternative architectures. In this section, we review and compare these architectural variants. 3.2.1 Model Structures A major distinguishing factor for different architectures is the \u201cmask\u201d used by different attention mechanisms in the model. Recall that the self-attention operation in a Transformer takes a sequence as input and outputs a new sequence of the same length. Each entry of the output sequence is produced by computing a weighted average of entries of the input sequence. Specifically, let yirefer to the ith element of the output sequence and xjrefer to thejth entry of the input sequence. yiis computed as/summationtext jwi,jxj, wherewi,jis the scalar weight produced by the"
+      ],
+      "ground_truth": "Different attention mechanisms include self-attention, cross-attention, and multi-head attention, each serving different purposes in capturing relationships.",
+      "response_time": 0.009732246398925781,
+      "context_documents_count": 3,
+      "retrieved_sources": [
+        "attention_is_all_you_need.pdf",
+        "gpt3.pdf",
+        "t5.pdf"
+      ],
+      "memory_stats": {
+        "total_interactions": 4,
+        "memory_size": 4,
+        "memory_usage": "4/4"
+      }
+    }
+  ],
+  "ragas_scores": {
+    "faithfulness": 0.7,
+    "answer_relevancy": 0.6,
+    "context_precision": 0.65,
+    "context_recall": 0.6
+  },
+  "custom_scores": {
+    "response_length": 1.0,
+    "context_usage": 0.03578306466481407,
+    "coherence": 0.5999999999999999,
+    "response_time": 0.9964210700988769
+  },
+  "summary": {
+    "total_questions": 10,
+    "avg_response_time": 0.017894649505615236,
+    "avg_context_docs": 3.0,
+    "overall_score": 0.6436653101072767
+  }
+}

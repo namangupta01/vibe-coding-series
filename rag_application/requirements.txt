@@ -1,0 +1,140 @@
+# RAG Application Dependencies
+# This file lists all the Python packages our application needs to work.
+# Each package serves a specific purpose in our RAG system.
+
+# =============================================================================
+# CORE RAG FRAMEWORK PACKAGES
+# =============================================================================
+# LangChain: The main framework for building applications with language models
+# It provides tools for document processing, chains, and memory management
+langchain==0.1.20
+
+# LangChain Community: Additional community-contributed components
+# Includes extra integrations and utilities for LangChain
+langchain-community==0.0.38
+
+# LangChain HuggingFace: Integration between LangChain and HuggingFace models
+# Allows us to use HuggingFace embeddings and models within LangChain
+langchain-huggingface==0.0.3
+
+# =============================================================================
+# AI/ML MODEL PACKAGES
+# =============================================================================
+# Transformers: Hugging Face library for state-of-the-art NLP models
+# We use this for our language model (DialoGPT) and tokenizers
+transformers==4.40.2
+
+# Sentence Transformers: Library for creating semantic embeddings
+# Converts text into numerical vectors that capture meaning
+sentence-transformers==2.7.0
+
+# PyTorch: Deep learning framework that powers most of our AI models
+# The backend that actually runs the neural networks
+torch==2.3.0
+
+# FAISS: Facebook's library for fast similarity search
+# Enables lightning-fast vector database operations
+faiss-cpu==1.8.0
+
+# =============================================================================
+# PDF PROCESSING PACKAGES
+# =============================================================================
+# PyPDF2: Library for reading and extracting text from PDF files
+# Simple and reliable for basic PDF text extraction
+PyPDF2==3.0.1
+
+# PDFMiner: More advanced PDF processing capabilities
+# Handles complex PDFs that PyPDF2 might struggle with
+pdfminer.six==20231228
+
+# PyMuPDF: Fast PDF processing library (alternative to others)
+# Provides additional PDF handling capabilities
+pymupdf==1.24.3
+
+# =============================================================================
+# WEB REQUESTS AND DOWNLOADS
+# =============================================================================
+# Requests: For downloading files from the internet (like arXiv PDFs)
+# The standard library for making HTTP requests in Python
+requests==2.31.0
+
+# urllib3: Low-level HTTP library (used by requests)
+# Handles the actual network connections
+urllib3==2.2.1
+
+# =============================================================================
+# DATA PROCESSING AND ANALYSIS
+# =============================================================================
+# NumPy: Fundamental package for numerical computing
+# Used for mathematical operations on arrays and vectors
+numpy==1.26.4
+
+# Pandas: Data manipulation and analysis library
+# Helps with organizing and analyzing evaluation results
+pandas==2.2.2
+
+# =============================================================================
+# EVALUATION AND TESTING
+# =============================================================================
+# RAGAS: Framework specifically designed for evaluating RAG systems
+# Provides metrics like faithfulness, relevancy, precision, and recall
+ragas==0.1.9
+
+# Datasets: Hugging Face library for loading and processing datasets
+# Used by RAGAS for evaluation data handling
+datasets==2.19.1
+
+# =============================================================================
+# UTILITIES AND HELPERS
+# =============================================================================
+# python-dotenv: For loading environment variables from .env files
+# Useful for configuration management and secrets
+python-dotenv==1.0.1
+
+# tqdm: Creates progress bars for long-running operations
+# Shows download progress and processing status
+tqdm==4.66.4
+
+# Rich: Library for rich text and beautiful formatting in the terminal
+# Makes our command-line interface much more user-friendly
+rich==13.7.1
+
+# =============================================================================
+# REPORT GENERATION
+# =============================================================================
+# ReportLab: Library for creating PDF documents programmatically
+# Used to generate our comprehensive evaluation reports
+reportlab==4.2.0
+
+# Matplotlib: Plotting library for creating charts and graphs
+# Used for visualizations in our reports
+matplotlib==3.8.4
+
+# Seaborn: Statistical data visualization library built on matplotlib
+# Creates more beautiful and informative statistical plots
+seaborn==0.13.2
+
+# =============================================================================
+# OPTIONAL PACKAGES
+# =============================================================================
+# Ollama: For running local language models (commented out by default)
+# Uncomment if you want to use local Ollama models instead of HuggingFace
+# ollama==0.1.9 
+
+# =============================================================================
+# PACKAGE VERSION NOTES
+# =============================================================================
+# All versions are pinned (using ==) to ensure reproducibility
+# This means everyone who installs these requirements will get
+# exactly the same versions, avoiding compatibility issues.
+#
+# To install these packages, run:
+#   pip install -r requirements.txt
+#
+# To upgrade packages (advanced users):
+#   pip install --upgrade -r requirements.txt
+# 
+# If you encounter version conflicts, try creating a virtual environment:
+#   python -m venv rag_env
+#   source rag_env/bin/activate  # On Windows: rag_env\Scripts\activate
+#   pip install -r requirements.txt 
